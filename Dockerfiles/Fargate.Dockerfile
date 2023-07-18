@@ -1,8 +1,17 @@
-FROM python:3-alpine
-WORKDIR /service
-COPY requirements.txt .
-RUN pip install -r requirements.txt
-COPY . ./
-EXPOSE 8080
-ENTRYPOINT ["python3"]
-CMD ["app.py"]
+# 
+FROM python:3.9
+
+# 
+WORKDIR /code
+
+# 
+COPY ./requirements.txt /code/requirements.txt
+
+# 
+RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+
+# 
+COPY ./app /code/app
+
+# 
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "80"]

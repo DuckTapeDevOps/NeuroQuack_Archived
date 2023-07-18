@@ -4,4 +4,5 @@ pynacl
 
 # other dependencies
 boto3
-flask
+fastapi
+uvicorn
